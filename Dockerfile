@@ -2,9 +2,46 @@ FROM ubuntu:18.04
 
 MAINTAINER Youtakunn
 
-RUN apt-get update
+USER root
 
-RUN apt-get install -y wget curl apt-utils git net-tools inetutils-ping neovim zsh openssh-server
-RUN apt-get install -y neofetch
+WORKDIR /root
 
-COPY --from=homebrew/ubuntu18.04 /home/linuxbrew /home/linuxbrew
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends software-properties-common gnupg-agent \
+ && add-apt-repository -y ppa:git-core/ppa \
+ && add-apt-repository -y ppa:neovim-ppa/stable \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends \
+  ca-certificates \
+  curl \
+  wget \
+  apt-utils \
+  netbase \
+  net-tools \
+  inetutils-ping \
+  openssh-client \
+  openssh-server \
+  bzip2 \
+  unzip \
+  g++ \
+  gawk \
+  git \
+  less \
+  libz-dev \
+  locales \
+  make \
+  patch \
+  sudo \
+  uuid-runtime \
+  tzdata \
+  neofetch \
+  ncdu \
+  zsh \
+  neovim \
+  tmux 
+
+RUN apt-get remove --purge -y software-properties-common \
+  && apt-get autoremove --purge -y \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN chsh -s /usr/bin/zsh
