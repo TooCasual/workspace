@@ -2,6 +2,8 @@ FROM ubuntu:18.04
 
 MAINTAINER Youtakunn
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 USER root
 
 WORKDIR /root
