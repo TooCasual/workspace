@@ -1,3 +1,7 @@
+FROM golang:1.18 as build
+
+RUN go install github.com/jesseduffield/lazygit@latest
+
 FROM ubuntu:20.04
 
 MAINTAINER Youtakunn
@@ -7,6 +11,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 USER root
 
 WORKDIR /root
+
+COPY --from=build /go/bin/lazygit /usr/local/bin/lazygit
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends software-properties-common gnupg-agent \
@@ -50,3 +56,4 @@ RUN apt-get remove --purge -y software-properties-common \
   && rm -rf /var/lib/apt/lists/*
 
 RUN chsh -s /usr/bin/zsh
+
