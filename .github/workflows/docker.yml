@@ -24,4 +24,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: youtakunn/workspace-base:1.0
+          tags: youtakunn/workspace-base:1.1

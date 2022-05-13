@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 MAINTAINER Youtakunn
 
@@ -25,13 +25,12 @@ RUN apt-get update \
   openssh-server \
   bzip2 \
   unzip \
-  g++ \
+  build-essential \
   gawk \
   git \
   less \
   libz-dev \
   locales \
-  make \
   patch \
   sudo \
   uuid-runtime \
@@ -39,8 +38,12 @@ RUN apt-get update \
   neofetch \
   ncdu \
   zsh \
+  fzf \
+  fd-find \
   neovim \
-  tmux 
+  tmux \
+  tmuxinator \
+  ranger
 
 RUN apt-get remove --purge -y software-properties-common \
   && apt-get autoremove --purge -y \
